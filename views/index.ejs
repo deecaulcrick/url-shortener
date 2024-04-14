@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>URL Shortener Microservice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/public/style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <section class="container">
+      <h1>URL Shortener.</h1>
+      <main>
+        <section>
+          <form action="/api/shorturl" method="post">
+            <input
+              type="text"
+              id="url_input"
+              name="url"
+              placeholder="Enter a valid url (e.g: https://google.com)"
+            />
+            <input type="submit" value="POST" />
+          </form>
+        </section>
+        <section class="links">
+          <table>
+            <thead>
+              <tr>
+                <th>Full Url</th>
+                <th>Short Url</th>
+                <th>Clicks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%shortUrls.forEach(shortUrl => { %>
+              <tr>
+                <td><a href="<%= shortUrl.full%>"><%= shortUrl.full%></a></td>
+                <td>
+                  <a href="api/<%= shortUrl.short%>"><%= shortUrl.short%></a>
+                </td>
+                <td><%= shortUrl.clicks%></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </section>
+      </main>
+      <footer>
+        <p>By <a href="https://twitter.com/deecaulcrick/">Dee Caulcrick</a></p>
+      </footer>
+    </section>
+  </body>
+</html>
